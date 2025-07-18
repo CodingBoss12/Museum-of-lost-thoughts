@@ -1,0 +1,291 @@
+/* === style.css === */
+
+@import url('https://fonts.googleapis.com/css2?family=Spectral:ital,wght@1,400;1,700&family=Unica+One&display=swap');
+
+body {
+  margin: 0;
+  padding: 0;
+  background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
+  color: #f0f0f0;
+  font-family: 'Spectral', serif;
+  overflow-x: hidden;
+  min-height: 100vh;
+}
+
+h1, h2 {
+  font-family: 'Unica One', cursive;
+  text-shadow: 0 0 15px rgba(255, 255, 255, 0.15);
+}
+
+a {
+  color: #ffc3a0;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+a:hover {
+  color: #ff7e67;
+}
+
+nav, .nav-links {
+  display: flex;
+  justify-content: space-between;
+  padding: 1rem 2rem;
+}
+
+.enter-button, .nav-links a {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid #ffb6b9;
+  border-radius: 12px;
+  padding: 1rem 2rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.enter-button:hover, .nav-links a:hover {
+  background: rgba(255, 255, 255, 0.08);
+  box-shadow: 0 0 10px #ffb6b9;
+}
+
+/* === Animations === */
+
+.fade-in {
+  animation: fadeIn 2s ease forwards;
+  opacity: 0;
+}
+
+@keyframes fadeIn {
+  to { opacity: 1; }
+}
+
+/* === Specific Pages === */
+
+/* index.html */
+.index-header {
+  text-align: center;
+  padding-top: 3rem;
+}
+
+.index-header h1 {
+  font-size: 3.5rem;
+  color: #ffdee9;
+}
+
+.index-header p {
+  font-style: italic;
+  opacity: 0.8;
+  margin-top: 1rem;
+}
+
+/* hall.html */
+.quote-box {
+  max-width: 800px;
+  margin: 2rem auto;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.quote {
+  background: rgba(255, 255, 255, 0.05);
+  border-left: 4px solid #ff5f6d;
+  padding: 1.5rem;
+  border-radius: 8px;
+  position: relative;
+  transition: all 0.3s ease;
+}
+
+.quote:hover {
+  transform: scale(1.03);
+  box-shadow: 0 0 20px #ff5f6d66;
+}
+
+/* exhibits.html */
+.gallery {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 2rem;
+  padding: 2rem;
+}
+
+.exhibit {
+  background: rgba(255, 255, 255, 0.05);
+  padding: 1.5rem;
+  border: 1px solid #ffb6b9;
+  border-radius: 12px;
+  transition: all 0.3s ease;
+}
+
+.exhibit:hover {
+  transform: scale(1.03) rotate(-0.5deg);
+  box-shadow: 0 0 20px #ffb6b980;
+}
+
+/* thoughts.html */
+#thought-loop {
+  max-width: 700px;
+  margin: 3rem auto;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.thought {
+  opacity: 0;
+  animation: fadeInThought 1s forwards;
+}
+
+@keyframes fadeInThought {
+  to { opacity: 1; }
+}
+
+/* Add to style.css */
+
+#main-nav {
+    position: sticky;
+    top: 0;
+    background: rgba(15, 12, 41, 0.85);
+    backdrop-filter: blur(10px);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.8rem 2rem;
+    z-index: 9999;
+    border-bottom: 1px solid #ffb6b9;
+  }
+  
+  .nav-left a {
+    margin-right: 1.5rem;
+    color: #ffc3a0;
+    font-weight: 600;
+    text-decoration: none;
+    font-size: 1.1rem;
+    transition: color 0.3s ease;
+  }
+  
+  .nav-left a:hover {
+    color: #ff7e67;
+  }
+  
+  #settings-btn {
+    background: none;
+    border: none;
+    color: #ffc3a0;
+    font-size: 1.5rem;
+    cursor: pointer;
+    transition: color 0.3s ease;
+  }
+  
+  #settings-btn:hover {
+    color: #ff7e67;
+  }
+  
+  /* Settings Panel */
+  
+  #settings-panel {
+    position: fixed;
+    top: 60px;
+    right: 20px;
+    background: rgba(15, 12, 41, 0.95);
+    border: 1px solid #ffb6b9;
+    border-radius: 12px;
+    padding: 1rem 2rem;
+    width: 250px;
+    color: #ffc3a0;
+    box-shadow: 0 0 20px #ffb6b980;
+    font-family: 'Spectral', serif;
+    z-index: 10000;
+  }
+  
+  .settings-hidden {
+    display: none;
+  }
+  
+  #settings-panel h3 {
+    margin-top: 0;
+    margin-bottom: 1rem;
+    font-family: 'Unica One', cursive;
+  }
+  
+  #settings-panel label {
+    display: block;
+    margin-bottom: 0.8rem;
+    font-size: 0.9rem;
+  }
+  
+  #settings-panel select, 
+  #settings-panel input[type="checkbox"] {
+    margin-left: 0.5rem;
+    cursor: pointer;
+  }
+  
+  #close-settings {
+    margin-top: 1rem;
+    width: 100%;
+    padding: 0.5rem;
+    background: #ff5f6d;
+    border: none;
+    border-radius: 8px;
+    color: black;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background 0.3s ease;
+  }
+  
+  #close-settings:hover {
+    background: #ffc371;
+  }
+  
+  /* Responsive Nav */
+  @media (max-width: 600px) {
+    #main-nav {
+      flex-wrap: wrap;
+    }
+    .nav-left a {
+      margin-right: 1rem;
+      font-size: 1rem;
+    }
+    #settings-panel {
+      top: 50px;
+      width: 90%;
+      right: 5%;
+    }
+  }
+  
+
+  /* Dark mode tweaks */
+
+body.dark-mode {
+    background: linear-gradient(135deg, #121212, #2c1f3e, #1f1b2d);
+    color: #ddd;
+  }
+  
+  body.dark-mode a {
+    color: #ffa7b3;
+  }
+  
+  body.dark-mode a:hover {
+    color: #ff4c3b;
+  }
+  
+  body.dark-mode #main-nav {
+    background: rgba(18, 18, 18, 0.85);
+    border-bottom: 1px solid #ff4c3b;
+  }
+  
+  body.dark-mode #settings-panel {
+    background: rgba(18, 18, 18, 0.95);
+    border-color: #ff4c3b;
+    box-shadow: 0 0 20px #ff4c3b80;
+  }
+  
+  body.dark-mode #close-settings {
+    background: #ff4c3b;
+    color: white;
+  }
+  
+  body.dark-mode #close-settings:hover {
+    background: #ffa7b3;
+  }
+  

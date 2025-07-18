@@ -9,6 +9,51 @@
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
+
+
+        <!-- Place this just inside <body> on every page, topmost -->
+
+    <nav id="main-nav" class="nav-glow">
+        <div class="nav-left">
+        <a href="index.html" class="nav-logo">🕯️ Lost Thoughts</a>
+        <a href="hall.html">Hall of Echoes</a>
+        <a href="exhibits.html">Thought Archives</a>
+        <a href="thoughts.html">Thought Loop</a>
+        </div>
+        <button id="settings-btn" aria-label="Toggle Settings">⚙️</button>
+    </nav>
+    
+    <div id="settings-panel" class="settings-hidden" aria-hidden="true">
+        <h3>Settings</h3>
+        <label>
+        <input type="checkbox" id="toggle-darkmode" />
+        Dark Mode
+        </label>
+        <label>
+        <input type="checkbox" id="toggle-sound" checked />
+        Ambient Sound
+        </label>
+        <label>
+        Text Size:
+        <select id="text-size-select">
+            <option value="small">Small</option>
+            <option value="medium" selected>Medium</option>
+            <option value="large">Large</option>
+        </select>
+        </label>
+        <label>
+        Font Style:
+        <select id="font-style-select">
+            <option value="spectral" selected>Spectral (Serif)</option>
+            <option value="unica">Unica One (Cursive)</option>
+        </select>
+        </label>
+        <button id="close-settings">Close</button>
+    </div>
+    
+
+
+
   <div class="index-header fade-in">
     <h1>The Thought Loop</h1>
     <p>Keep scrolling. The thoughts will find you.</p>
