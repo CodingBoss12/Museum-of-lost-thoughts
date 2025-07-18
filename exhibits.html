@@ -1,92 +1,58 @@
+/* === exhibits.html === */
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Thought Archives | Museum of Lost Thoughts</title>
-  <link rel="icon" type="image/png" href="favicon.png" />
-  <link href="https://fonts.googleapis.com/css2?family=Spectral:ital,wght@1,400;1,700&family=Unica+One&display=swap" rel="stylesheet">
-  <style>
-    body {
-      margin: 0;
-      padding: 2rem;
-      background: linear-gradient(180deg, #0f0c29, #302b63);
-      font-family: 'Spectral', serif;
-      color: #f8f8f8;
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-    }
-
-    h1 {
-      text-align: center;
-      font-family: 'Unica One', cursive;
-      font-size: 3rem;
-      color: #fcb6d0;
-      margin-bottom: 2rem;
-      text-shadow: 0 0 15px #fcb6d055;
-    }
-
-    .gallery {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap: 2rem;
-      padding: 1rem;
-      flex: 1;
-    }
-
-    .exhibit {
-      background: rgba(255, 255, 255, 0.05);
-      border: 1px solid #ffb6b9;
-      border-radius: 12px;
-      padding: 1.5rem;
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
-      position: relative;
-    }
-
-    .exhibit:hover {
-      transform: scale(1.03) rotate(-0.5deg);
-      box-shadow: 0 0 20px #ffb6b980;
-    }
-
-    .exhibit h2 {
-      font-size: 1.4rem;
-      margin-bottom: 0.5rem;
-      color: #ffe0e9;
-    }
-
-    .exhibit p {
-      font-size: 1rem;
-      opacity: 0.9;
-    }
-
-    .nav-links {
-      display: flex;
-      justify-content: space-between;
-      padding: 2rem 0 0;
-      font-size: 0.95rem;
-    }
-
-    a {
-      color: #ffc3a0;
-      text-decoration: none;
-      font-weight: bold;
-    }
-
-    a:hover {
-      text-decoration: underline;
-      color: #ff7e67;
-    }
-
-    @media (max-width: 600px) {
-      h1 {
-        font-size: 2rem;
-      }
-    }
-  </style>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <h1>The Thought Archives</h1>
+
+  <!-- Place this just inside <body> on every page, topmost -->
+
+  <nav id="main-nav" class="nav-glow">
+    <div class="nav-left">
+      <a href="index.html" class="nav-logo">🕯️ Lost Thoughts</a>
+      <a href="hall.html">Hall of Echoes</a>
+      <a href="exhibits.html">Thought Archives</a>
+      <a href="thoughts.html">Thought Loop</a>
+    </div>
+    <button id="settings-btn" aria-label="Toggle Settings">⚙️</button>
+  </nav>
+
+  <div id="settings-panel" class="settings-hidden" aria-hidden="true">
+    <h3>Settings</h3>
+    <label>
+      <input type="checkbox" id="toggle-darkmode" />
+      Dark Mode
+    </label>
+    <label>
+      <input type="checkbox" id="toggle-sound" checked />
+      Ambient Sound
+    </label>
+    <label>
+      Text Size:
+      <select id="text-size-select">
+        <option value="small">Small</option>
+        <option value="medium" selected>Medium</option>
+        <option value="large">Large</option>
+      </select>
+    </label>
+    <label>
+      Font Style:
+      <select id="font-style-select">
+        <option value="spectral" selected>Spectral (Serif)</option>
+        <option value="unica">Unica One (Cursive)</option>
+      </select>
+    </label>
+    <button id="close-settings">Close</button>
+  </div>
+
+  <div class="index-header fade-in">
+    <h1>The Thought Archives</h1>
+  </div>
 
   <div class="gallery">
     <div class="exhibit">
@@ -117,7 +83,74 @@
 
   <div class="nav-links">
     <a href="hall.html">← Return to Echoes</a>
-    <a href="404.html">Mystery Room →</a>
+    <a href="thoughts.html">Enter the Thought Loop →</a>
   </div>
 </body>
+// Add this script at the bottom of each page, before </body>
+
+<script>
+  const settingsBtn = document.getElementById('settings-btn');
+  const settingsPanel = document.getElementById('settings-panel');
+  const closeSettingsBtn = document.getElementById('close-settings');
+
+  // Toggles the settings panel
+  settingsBtn.addEventListener('click', () => {
+    const isHidden = settingsPanel.classList.contains('settings-hidden');
+    if (isHidden) {
+      settingsPanel.classList.remove('settings-hidden');
+      settingsPanel.setAttribute('aria-hidden', 'false');
+    } else {
+      settingsPanel.classList.add('settings-hidden');
+      settingsPanel.setAttribute('aria-hidden', 'true');
+    }
+  });
+
+  closeSettingsBtn.addEventListener('click', () => {
+    settingsPanel.classList.add('settings-hidden');
+    settingsPanel.setAttribute('aria-hidden', 'true');
+  });
+
+  // Dark mode toggle
+  const darkModeCheckbox = document.getElementById('toggle-darkmode');
+  darkModeCheckbox.addEventListener('change', () => {
+    if (darkModeCheckbox.checked) {
+      document.body.classList.add('dark-mode');
+    } else {
+      document.body.classList.remove('dark-mode');
+    }
+  });
+
+  // Ambient sound toggle (placeholder)
+  const soundCheckbox = document.getElementById('toggle-sound');
+  soundCheckbox.addEventListener('change', () => {
+    if (soundCheckbox.checked) {
+      // TODO: play ambient sound
+      console.log('Ambient sound ON');
+    } else {
+      // TODO: stop ambient sound
+      console.log('Ambient sound OFF');
+    }
+  });
+
+  // Text size selector
+  const textSizeSelect = document.getElementById('text-size-select');
+  textSizeSelect.addEventListener('change', () => {
+    document.body.style.fontSize = {
+      small: '14px',
+      medium: '16px',
+      large: '18px'
+    }[textSizeSelect.value];
+  });
+
+  // Font style selector
+  const fontStyleSelect = document.getElementById('font-style-select');
+  fontStyleSelect.addEventListener('change', () => {
+    if (fontStyleSelect.value === 'unica') {
+      document.body.style.fontFamily = "'Unica One', cursive";
+    } else {
+      document.body.style.fontFamily = "'Spectral', serif";
+    }
+  });
+</script>
+
 </html>

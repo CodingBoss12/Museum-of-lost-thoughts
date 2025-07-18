@@ -91,4 +91,71 @@
     for (let i = 0; i < 5; i++) addThought();
   </script>
 </body>
+// Add this script at the bottom of each page, before </body>
+
+<script>
+  const settingsBtn = document.getElementById('settings-btn');
+  const settingsPanel = document.getElementById('settings-panel');
+  const closeSettingsBtn = document.getElementById('close-settings');
+
+  // Toggles the settings panel
+  settingsBtn.addEventListener('click', () => {
+    const isHidden = settingsPanel.classList.contains('settings-hidden');
+    if (isHidden) {
+      settingsPanel.classList.remove('settings-hidden');
+      settingsPanel.setAttribute('aria-hidden', 'false');
+    } else {
+      settingsPanel.classList.add('settings-hidden');
+      settingsPanel.setAttribute('aria-hidden', 'true');
+    }
+  });
+
+  closeSettingsBtn.addEventListener('click', () => {
+    settingsPanel.classList.add('settings-hidden');
+    settingsPanel.setAttribute('aria-hidden', 'true');
+  });
+
+  // Dark mode toggle
+  const darkModeCheckbox = document.getElementById('toggle-darkmode');
+  darkModeCheckbox.addEventListener('change', () => {
+    if (darkModeCheckbox.checked) {
+      document.body.classList.add('dark-mode');
+    } else {
+      document.body.classList.remove('dark-mode');
+    }
+  });
+
+  // Ambient sound toggle (placeholder)
+  const soundCheckbox = document.getElementById('toggle-sound');
+  soundCheckbox.addEventListener('change', () => {
+    if (soundCheckbox.checked) {
+      // TODO: play ambient sound
+      console.log('Ambient sound ON');
+    } else {
+      // TODO: stop ambient sound
+      console.log('Ambient sound OFF');
+    }
+  });
+
+  // Text size selector
+  const textSizeSelect = document.getElementById('text-size-select');
+  textSizeSelect.addEventListener('change', () => {
+    document.body.style.fontSize = {
+      small: '14px',
+      medium: '16px',
+      large: '18px'
+    }[textSizeSelect.value];
+  });
+
+  // Font style selector
+  const fontStyleSelect = document.getElementById('font-style-select');
+  fontStyleSelect.addEventListener('change', () => {
+    if (fontStyleSelect.value === 'unica') {
+      document.body.style.fontFamily = "'Unica One', cursive";
+    } else {
+      document.body.style.fontFamily = "'Spectral', serif";
+    }
+  });
+</script>
+
 </html>

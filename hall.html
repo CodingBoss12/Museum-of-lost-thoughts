@@ -1,101 +1,57 @@
+/* === hall.html === */
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Hall of Echoes | Museum of Lost Thoughts</title>
-  <link rel="icon" type="image/png" href="favicon.png" />
-  <link href="https://fonts.googleapis.com/css2?family=Spectral:ital,wght@1,400;1,700&family=Unica+One&display=swap" rel="stylesheet">
-  <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-
-    body {
-      background: radial-gradient(ellipse at center, #1a1a2e 0%, #0f0c29 100%);
-      color: #f0f0f0;
-      font-family: 'Spectral', serif;
-      overflow-x: hidden;
-      padding: 2rem;
-      display: flex;
-      flex-direction: column;
-      min-height: 100vh;
-    }
-
-    h1 {
-      text-align: center;
-      font-family: 'Unica One', cursive;
-      font-size: 3rem;
-      color: #ffd6ff;
-      margin-bottom: 2rem;
-      text-shadow: 0 0 15px #ffb3c1;
-    }
-
-    .quote-box {
-      display: flex;
-      flex-direction: column;
-      gap: 2rem;
-      max-width: 800px;
-      margin: 0 auto;
-    }
-
-    .quote {
-      font-size: 1.3rem;
-      position: relative;
-      padding: 1.2rem;
-      background: rgba(255, 255, 255, 0.05);
-      border-left: 4px solid #ff5f6d;
-      border-radius: 8px;
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
-    }
-
-    .quote:hover {
-      transform: scale(1.03) rotate(-0.5deg);
-      box-shadow: 0 0 25px #ff5f6d66;
-    }
-
-    .quote::before {
-      content: "❝";
-      font-size: 3rem;
-      position: absolute;
-      top: -10px;
-      left: -25px;
-      color: #ffb3c1;
-      opacity: 0.4;
-    }
-
-    .nav-links {
-      display: flex;
-      justify-content: space-between;
-      margin-top: auto;
-      padding: 2rem 0;
-    }
-
-    a {
-      text-decoration: none;
-      color: #ffc3a0;
-      font-weight: bold;
-      transition: color 0.2s;
-    }
-
-    a:hover {
-      color: #ff5f6d;
-    }
-
-    @media (max-width: 600px) {
-      h1 {
-        font-size: 2rem;
-      }
-      .quote {
-        font-size: 1rem;
-      }
-    }
-  </style>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <h1>The Hall of Echoes</h1>
+  <!-- Place this just inside <body> on every page, topmost -->
+
+  <nav id="main-nav" class="nav-glow">
+    <div class="nav-left">
+      <a href="index.html" class="nav-logo">🕯️ Lost Thoughts</a>
+      <a href="hall.html">Hall of Echoes</a>
+      <a href="exhibits.html">Thought Archives</a>
+      <a href="thoughts.html">Thought Loop</a>
+    </div>
+    <button id="settings-btn" aria-label="Toggle Settings">⚙️</button>
+  </nav>
+
+  <div id="settings-panel" class="settings-hidden" aria-hidden="true">
+    <h3>Settings</h3>
+    <label>
+      <input type="checkbox" id="toggle-darkmode" />
+      Dark Mode
+    </label>
+    <label>
+      <input type="checkbox" id="toggle-sound" checked />
+      Ambient Sound
+    </label>
+    <label>
+      Text Size:
+      <select id="text-size-select">
+        <option value="small">Small</option>
+        <option value="medium" selected>Medium</option>
+        <option value="large">Large</option>
+      </select>
+    </label>
+    <label>
+      Font Style:
+      <select id="font-style-select">
+        <option value="spectral" selected>Spectral (Serif)</option>
+        <option value="unica">Unica One (Cursive)</option>
+      </select>
+    </label>
+    <button id="close-settings">Close</button>
+  </div>
+
+  <div class="index-header fade-in">
+    <h1>The Hall of Echoes</h1>
+  </div>
 
   <div class="quote-box">
     <div class="quote">I once had a thought so loud it silenced every word I never said.</div>
@@ -110,4 +66,71 @@
     <a href="exhibits.html">To the Archives →</a>
   </div>
 </body>
+// Add this script at the bottom of each page, before </body>
+
+<script>
+  const settingsBtn = document.getElementById('settings-btn');
+  const settingsPanel = document.getElementById('settings-panel');
+  const closeSettingsBtn = document.getElementById('close-settings');
+
+  // Toggles the settings panel
+  settingsBtn.addEventListener('click', () => {
+    const isHidden = settingsPanel.classList.contains('settings-hidden');
+    if (isHidden) {
+      settingsPanel.classList.remove('settings-hidden');
+      settingsPanel.setAttribute('aria-hidden', 'false');
+    } else {
+      settingsPanel.classList.add('settings-hidden');
+      settingsPanel.setAttribute('aria-hidden', 'true');
+    }
+  });
+
+  closeSettingsBtn.addEventListener('click', () => {
+    settingsPanel.classList.add('settings-hidden');
+    settingsPanel.setAttribute('aria-hidden', 'true');
+  });
+
+  // Dark mode toggle
+  const darkModeCheckbox = document.getElementById('toggle-darkmode');
+  darkModeCheckbox.addEventListener('change', () => {
+    if (darkModeCheckbox.checked) {
+      document.body.classList.add('dark-mode');
+    } else {
+      document.body.classList.remove('dark-mode');
+    }
+  });
+
+  // Ambient sound toggle (placeholder)
+  const soundCheckbox = document.getElementById('toggle-sound');
+  soundCheckbox.addEventListener('change', () => {
+    if (soundCheckbox.checked) {
+      // TODO: play ambient sound
+      console.log('Ambient sound ON');
+    } else {
+      // TODO: stop ambient sound
+      console.log('Ambient sound OFF');
+    }
+  });
+
+  // Text size selector
+  const textSizeSelect = document.getElementById('text-size-select');
+  textSizeSelect.addEventListener('change', () => {
+    document.body.style.fontSize = {
+      small: '14px',
+      medium: '16px',
+      large: '18px'
+    }[textSizeSelect.value];
+  });
+
+  // Font style selector
+  const fontStyleSelect = document.getElementById('font-style-select');
+  fontStyleSelect.addEventListener('change', () => {
+    if (fontStyleSelect.value === 'unica') {
+      document.body.style.fontFamily = "'Unica One', cursive";
+    } else {
+      document.body.style.fontFamily = "'Spectral', serif";
+    }
+  });
+</script>
+
 </html>

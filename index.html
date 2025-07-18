@@ -1,113 +1,124 @@
+/* === index.html === */
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Museum of Lost Thoughts</title>
-  <link rel="icon" type="image/png" href="favicon.png" />
-  <link href="https://fonts.googleapis.com/css2?family=Spectral:wght@400;700&family=Unica+One&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css" />
-  <style>
-    body {
-      margin: 0;
-      font-family: 'Spectral', serif;
-      background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
-      color: #f0f0f0;
-      display: flex;
-      flex-direction: column;
-      min-height: 100vh;
-    }
-
-    header {
-      text-align: center;
-      padding: 3rem 1rem 1rem;
-    }
-
-    header h1 {
-      font-family: 'Unica One', cursive;
-      font-size: 3.5rem;
-      margin-bottom: 0.5rem;
-      color: #ffdee9;
-      text-shadow: 0 0 10px #ffdee999;
-    }
-
-    header p {
-      font-style: italic;
-      font-size: 1.2rem;
-      max-width: 700px;
-      margin: 0 auto;
-      opacity: 0.8;
-    }
-
-    main {
-      flex: 1;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      flex-direction: column;
-      padding: 2rem;
-    }
-
-    .enter-button {
-      background-color: #ff5f6d;
-      background-image: linear-gradient(to right, #ffc371, #ff5f6d);
-      color: #000;
-      padding: 1rem 2rem;
-      border: none;
-      border-radius: 10px;
-      font-size: 1.2rem;
-      cursor: pointer;
-      margin-top: 2rem;
-      transition: transform 0.2s, box-shadow 0.2s;
-      text-decoration: none;
-      font-weight: bold;
-    }
-
-    .enter-button:hover {
-      transform: scale(1.05);
-      box-shadow: 0 0 20px #ffc37188;
-    }
-
-    footer {
-      text-align: center;
-      padding: 1rem;
-      font-size: 0.9rem;
-      color: #aaa;
-      background: rgba(0, 0, 0, 0.2);
-    }
-
-    footer a {
-      color: #ffc3a0;
-      text-decoration: none;
-    }
-
-    footer a:hover {
-      text-decoration: underline;
-    }
-
-    @media screen and (max-width: 600px) {
-      header h1 {
-        font-size: 2.5rem;
-      }
-
-      .enter-button {
-        width: 80%;
-      }
-    }
-  </style>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <header>
+    <!-- Place this just inside <body> on every page, topmost -->
+
+  <nav id="main-nav" class="nav-glow">
+    <div class="nav-left">
+      <a href="index.html" class="nav-logo">🕯️ Lost Thoughts</a>
+      <a href="hall.html">Hall of Echoes</a>
+      <a href="exhibits.html">Thought Archives</a>
+      <a href="thoughts.html">Thought Loop</a>
+    </div>
+    <button id="settings-btn" aria-label="Toggle Settings">⚙️</button>
+  </nav>
+
+  <div id="settings-panel" class="settings-hidden" aria-hidden="true">
+    <h3>Settings</h3>
+    <label>
+      <input type="checkbox" id="toggle-darkmode" />
+      Dark Mode
+    </label>
+    <label>
+      <input type="checkbox" id="toggle-sound" checked />
+      Ambient Sound
+    </label>
+    <label>
+      Text Size:
+      <select id="text-size-select">
+        <option value="small">Small</option>
+        <option value="medium" selected>Medium</option>
+        <option value="large">Large</option>
+      </select>
+    </label>
+    <label>
+      Font Style:
+      <select id="font-style-select">
+        <option value="spectral" selected>Spectral (Serif)</option>
+        <option value="unica">Unica One (Cursive)</option>
+      </select>
+    </label>
+    <button id="close-settings">Close</button>
+  </div>
+  <div class="index-header fade-in">
     <h1>Museum of Lost Thoughts</h1>
-    <p>Somewhere between dreams and code lies everything we forgot to say. Welcome to the archive of almost-somethings.</p>
-  </header>
-
-  <main>
+    <p>Somewhere between dreams and code lies everything we forgot to say.</p>
     <a href="hall.html" class="enter-button">Enter the Hall of Echoes</a>
-  </main>
-
-  <footer>
-    © 2025 Museum of Lost Thoughts • <a href="mailto:curator@lostthoughts.org">Email the Curator</a>
-  </footer>
+  </div>
 </body>
+// Add this script at the bottom of each page, before </body>
+
+<script>
+  const settingsBtn = document.getElementById('settings-btn');
+  const settingsPanel = document.getElementById('settings-panel');
+  const closeSettingsBtn = document.getElementById('close-settings');
+
+  // Toggles the settings panel
+  settingsBtn.addEventListener('click', () => {
+    const isHidden = settingsPanel.classList.contains('settings-hidden');
+    if (isHidden) {
+      settingsPanel.classList.remove('settings-hidden');
+      settingsPanel.setAttribute('aria-hidden', 'false');
+    } else {
+      settingsPanel.classList.add('settings-hidden');
+      settingsPanel.setAttribute('aria-hidden', 'true');
+    }
+  });
+
+  closeSettingsBtn.addEventListener('click', () => {
+    settingsPanel.classList.add('settings-hidden');
+    settingsPanel.setAttribute('aria-hidden', 'true');
+  });
+
+  // Dark mode toggle
+  const darkModeCheckbox = document.getElementById('toggle-darkmode');
+  darkModeCheckbox.addEventListener('change', () => {
+    if (darkModeCheckbox.checked) {
+      document.body.classList.add('dark-mode');
+    } else {
+      document.body.classList.remove('dark-mode');
+    }
+  });
+
+  // Ambient sound toggle (placeholder)
+  const soundCheckbox = document.getElementById('toggle-sound');
+  soundCheckbox.addEventListener('change', () => {
+    if (soundCheckbox.checked) {
+      // TODO: play ambient sound
+      console.log('Ambient sound ON');
+    } else {
+      // TODO: stop ambient sound
+      console.log('Ambient sound OFF');
+    }
+  });
+
+  // Text size selector
+  const textSizeSelect = document.getElementById('text-size-select');
+  textSizeSelect.addEventListener('change', () => {
+    document.body.style.fontSize = {
+      small: '14px',
+      medium: '16px',
+      large: '18px'
+    }[textSizeSelect.value];
+  });
+
+  // Font style selector
+  const fontStyleSelect = document.getElementById('font-style-select');
+  fontStyleSelect.addEventListener('change', () => {
+    if (fontStyleSelect.value === 'unica') {
+      document.body.style.fontFamily = "'Unica One', cursive";
+    } else {
+      document.body.style.fontFamily = "'Spectral', serif";
+    }
+  });
+</script>
+
 </html>
