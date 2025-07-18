@@ -1,150 +1,54 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Museum of Lost Thoughts</title>
-  <link rel="stylesheet" href="style.css">
-  <link rel="icon" href="favicon.png" type="image/png" sizes="32x32" />
-  <link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
+  <link rel="icon" href="favicon.png" type="image/png" />
+  <link href="https://fonts.googleapis.com/css2?family=Spectral:wght@400;700&family=Unica+One&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-    <!-- Place this just inside <body> on every page, topmost -->
 
-  <nav id="main-nav" class="nav-glow">
-    <div class="nav-left">
-      <a href="index.html" class="nav-logo">🕯️ Lost Thoughts</a>
-      <a href="hall.html">Hall of Echoes</a>
-      <a href="exhibits.html">Thought Archives</a>
-      <a href="thoughts.html">Thought Loop</a>
-    </div>
-    <button id="settings-btn" aria-label="Toggle Settings">⚙️</button>
-  </nav>
+  <canvas id="particles"></canvas>
 
-  <div id="settings-panel" class="settings-hidden" aria-hidden="true">
-    <h3>Settings</h3>
-    <label>
-      <input type="checkbox" id="toggle-darkmode" />
-      Dark Mode
-    </label>
-    <label>
-      <input type="checkbox" id="toggle-sound" checked />
-      Ambient Sound
-    </label>
-    <label>
-      Text Size:
-      <select id="text-size-select">
-        <option value="small">Small</option>
-        <option value="medium" selected>Medium</option>
-        <option value="large">Large</option>
-      </select>
-    </label>
-    <label>
-      Font Style:
-      <select id="font-style-select">
-        <option value="spectral" selected>Spectral (Serif)</option>
-        <option value="unica">Unica One (Cursive)</option>
-      </select>
-    </label>
-    <button id="close-settings">Close</button>
-  </div>
-  <div class="index-header fade-in">
+  <div class="cursor-glow"></div>
+
+  <header>
     <h1>Museum of Lost Thoughts</h1>
-    <p>Somewhere between dreams and code lies everything we forgot to say.</p>
-    <a href="hall.html" class="enter-button">Enter the Hall of Echoes</a>
+    <p class="intro">Between dreams and silence lives everything you almost said. Welcome to the archive of almost-somethings.</p>
+    <button class="enter-button" onclick="location.href='hall.html'">Enter the Hall of Echoes</button>
+    <button class="settings-button" onclick="openSettings()">⚙️ Settings</button>
+  </header>
+
+  <div id="settings-modal" class="modal hidden">
+    <div class="modal-content">
+      <h2>Settings</h2>
+      <label><input type="checkbox" id="darkmode-toggle" /> Dark Mode</label><br/>
+      <label><input type="checkbox" id="sound-toggle" /> Ambient Sound</label><br/>
+      <label>Text Size:
+        <select id="text-size-select">
+          <option value="medium">Medium</option>
+          <option value="small">Small</option>
+          <option value="large">Large</option>
+        </select>
+      </label><br/>
+      <label>Font:
+        <select id="font-select">
+          <option value="spectral">Spectral</option>
+          <option value="unica">Unica One</option>
+        </select>
+      </label><br/>
+      <button onclick="closeSettings()">Close</button>
+    </div>
   </div>
 
-  <!-- glowing cursor div -->
-<div class="cursor-glow"></div>
+  <audio id="ambient-audio" src="ambient-loop.mp3" loop preload="auto"></audio>
 
-<!-- Ambient sound element -->
-<audio id="ambient-sound" loop src="ambient-loop.mp3" preload="auto"></audio>
+  <footer>
+    © 2025 Museum of Lost Thoughts • <a href="mailto:curator@lostthoughts.org">Email the Curator</a>
+  </footer>
 
-
-
+  <script src="script.js"></script>
 </body>
-
-<script>
-  // Cursor glow follow
-  const cursorGlow = document.querySelector('.cursor-glow');
-
-  window.addEventListener('mousemove', (e) => {
-    cursorGlow.style.left = e.clientX + 'px';
-    cursorGlow.style.top = e.clientY + 'px';
-  });
-
-  // Ambient sound logic
-  const soundCheckbox = document.getElementById('toggle-sound');
-  const ambientSound = document.getElementById('ambient-sound');
-
-  // Load saved sound setting from localStorage
-  if (localStorage.getItem('ambientSound') === 'off') {
-    soundCheckbox.checked = false;
-  } else {
-    ambientSound.play().catch(() => {}); // autoplay might fail on some browsers
-  }
-
-  soundCheckbox.addEventListener('change', () => {
-    if (soundCheckbox.checked) {
-      ambientSound.play();
-      localStorage.setItem('ambientSound', 'on');
-    } else {
-      ambientSound.pause();
-      localStorage.setItem('ambientSound', 'off');
-    }
-  });
-
-  // Save dark mode setting to localStorage as well
-  const darkModeCheckbox = document.getElementById('toggle-darkmode');
-  if(localStorage.getItem('darkMode') === 'on') {
-    darkModeCheckbox.checked = true;
-    document.body.classList.add('dark-mode');
-  }
-
-  darkModeCheckbox.addEventListener('change', () => {
-    if (darkModeCheckbox.checked) {
-      document.body.classList.add('dark-mode');
-      localStorage.setItem('darkMode', 'on');
-    } else {
-      document.body.classList.remove('dark-mode');
-      localStorage.setItem('darkMode', 'off');
-    }
-  });
-
-  // Text size with localStorage
-  const textSizeSelect = document.getElementById('text-size-select');
-  if(localStorage.getItem('textSize')) {
-    textSizeSelect.value = localStorage.getItem('textSize');
-    document.body.style.fontSize = {
-      small: '14px',
-      medium: '16px',
-      large: '18px'
-    }[textSizeSelect.value];
-  }
-  textSizeSelect.addEventListener('change', () => {
-    document.body.style.fontSize = {
-      small: '14px',
-      medium: '16px',
-      large: '18px'
-    }[textSizeSelect.value];
-    localStorage.setItem('textSize', textSizeSelect.value);
-  });
-
-  // Font style with localStorage
-  const fontStyleSelect = document.getElementById('font-style-select');
-  if(localStorage.getItem('fontStyle')) {
-    fontStyleSelect.value = localStorage.getItem('fontStyle');
-    document.body.style.fontFamily = fontStyleSelect.value === 'unica' ? "'Unica One', cursive" : "'Spectral', serif";
-  }
-  fontStyleSelect.addEventListener('change', () => {
-    if (fontStyleSelect.value === 'unica') {
-      document.body.style.fontFamily = "'Unica One', cursive";
-    } else {
-      document.body.style.fontFamily = "'Spectral', serif";
-    }
-    localStorage.setItem('fontStyle', fontStyleSelect.value);
-  });
-</script>
-
-
 </html>
