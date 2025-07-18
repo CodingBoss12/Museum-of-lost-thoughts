@@ -1,0 +1,49 @@
+/* === thoughts.html === */
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>The Thought Loop | Museum of Lost Thoughts</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="index-header fade-in">
+    <h1>The Thought Loop</h1>
+    <p>Keep scrolling. The thoughts will find you.</p>
+  </div>
+
+  <div id="thought-loop"></div>
+
+  <script>
+    const thoughts = [
+      "You left the light on in a memory you can’t go back to.",
+      "This moment is already forgotten somewhere.",
+      "If you could refresh your brain, what would you lose?",
+      "You’ve been here before.",
+      "Every thought you abandon still waits for you.",
+      "Somewhere, a version of you still remembers.",
+      "What if this is a cached version of reality?",
+      "Time loops but the mind glitches.",
+      "You’re reading this in a dream you forgot to wake up from."
+    ];
+
+    function addThought() {
+      const div = document.createElement('div');
+      div.className = 'thought';
+      div.textContent = thoughts[Math.floor(Math.random() * thoughts.length)];
+      document.getElementById('thought-loop').appendChild(div);
+    }
+
+    window.addEventListener('scroll', () => {
+      if (window.innerHeight + window.scrollY >= document.body.offsetHeight - 100) {
+        addThought();
+      }
+    });
+
+    // Start with 5 thoughts
+    for (let i = 0; i < 5; i++) addThought();
+  </script>
+</body>
+</html>

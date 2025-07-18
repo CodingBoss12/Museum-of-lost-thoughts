@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Thought Archives | Museum of Lost Thoughts</title>
+  <link rel="icon" type="image/png" href="favicon.png" />
+  <link href="https://fonts.googleapis.com/css2?family=Spectral:ital,wght@1,400;1,700&family=Unica+One&display=swap" rel="stylesheet">
+  <style>
+    body {
+      margin: 0;
+      padding: 2rem;
+      background: linear-gradient(180deg, #0f0c29, #302b63);
+      font-family: 'Spectral', serif;
+      color: #f8f8f8;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    h1 {
+      text-align: center;
+      font-family: 'Unica One', cursive;
+      font-size: 3rem;
+      color: #fcb6d0;
+      margin-bottom: 2rem;
+      text-shadow: 0 0 15px #fcb6d055;
+    }
+
+    .gallery {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 2rem;
+      padding: 1rem;
+      flex: 1;
+    }
+
+    .exhibit {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid #ffb6b9;
+      border-radius: 12px;
+      padding: 1.5rem;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      position: relative;
+    }
+
+    .exhibit:hover {
+      transform: scale(1.03) rotate(-0.5deg);
+      box-shadow: 0 0 20px #ffb6b980;
+    }
+
+    .exhibit h2 {
+      font-size: 1.4rem;
+      margin-bottom: 0.5rem;
+      color: #ffe0e9;
+    }
+
+    .exhibit p {
+      font-size: 1rem;
+      opacity: 0.9;
+    }
+
+    .nav-links {
+      display: flex;
+      justify-content: space-between;
+      padding: 2rem 0 0;
+      font-size: 0.95rem;
+    }
+
+    a {
+      color: #ffc3a0;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    a:hover {
+      text-decoration: underline;
+      color: #ff7e67;
+    }
+
+    @media (max-width: 600px) {
+      h1 {
+        font-size: 2rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <h1>The Thought Archives</h1>
+
+  <div class="gallery">
+    <div class="exhibit">
+      <h2>Unsent Email to the Moon</h2>
+      <p>A drafted message that never left the outbox. Subject line: “Are you still listening?”</p>
+    </div>
+    <div class="exhibit">
+      <h2>Forgotten Password to a Past Life</h2>
+      <p>All lowercase, no symbols, just the name you used to call yourself when you were brave.</p>
+    </div>
+    <div class="exhibit">
+      <h2>Bottled Nostalgia (Year: Unknown)</h2>
+      <p>The air smelled like rain and burnt toast. You didn’t want to leave—but you left anyway.</p>
+    </div>
+    <div class="exhibit">
+      <h2>Screenshot of a Dream</h2>
+      <p>Distorted pixels and a timestamp that doesn’t exist. You were flying. Or maybe falling.</p>
+    </div>
+    <div class="exhibit">
+      <h2>The Echo of a Deleted Message</h2>
+      <p>They never saw it. But the cursor blinked. The thought existed. That’s enough.</p>
+    </div>
+    <div class="exhibit">
+      <h2>Last Page of a Burnt Journal</h2>
+      <p>Smudged ink, half a sentence: “I think I finally know wh–”</p>
+    </div>
+  </div>
+
+  <div class="nav-links">
+    <a href="hall.html">← Return to Echoes</a>
+    <a href="404.html">Mystery Room →</a>
+  </div>
+</body>
+</html>
