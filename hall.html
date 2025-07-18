@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Hall of Echoes | Museum of Lost Thoughts</title>
   <link rel="stylesheet" href="style.css">
+  <link rel="icon" href="favicon.png" type="image/png" sizes="32x32" /><link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
 </head>
 <body>
   <!-- Place this just inside <body> on every page, topmost -->
@@ -66,68 +67,86 @@
 </body>
 
 <script>
-  const settingsBtn = document.getElementById('settings-btn');
-  const settingsPanel = document.getElementById('settings-panel');
-  const closeSettingsBtn = document.getElementById('close-settings');
+  // Cursor glow follow
+  const cursorGlow = document.querySelector('.cursor-glow');
 
-  // Toggles the settings panel
-  settingsBtn.addEventListener('click', () => {
-    const isHidden = settingsPanel.classList.contains('settings-hidden');
-    if (isHidden) {
-      settingsPanel.classList.remove('settings-hidden');
-      settingsPanel.setAttribute('aria-hidden', 'false');
+  window.addEventListener('mousemove', (e) => {
+    cursorGlow.style.left = e.clientX + 'px';
+    cursorGlow.style.top = e.clientY + 'px';
+  });
+
+  // Ambient sound logic
+  const soundCheckbox = document.getElementById('toggle-sound');
+  const ambientSound = document.getElementById('ambient-sound');
+
+  // Load saved sound setting from localStorage
+  if (localStorage.getItem('ambientSound') === 'off') {
+    soundCheckbox.checked = false;
+  } else {
+    ambientSound.play().catch(() => {}); // autoplay might fail on some browsers
+  }
+
+  soundCheckbox.addEventListener('change', () => {
+    if (soundCheckbox.checked) {
+      ambientSound.play();
+      localStorage.setItem('ambientSound', 'on');
     } else {
-      settingsPanel.classList.add('settings-hidden');
-      settingsPanel.setAttribute('aria-hidden', 'true');
+      ambientSound.pause();
+      localStorage.setItem('ambientSound', 'off');
     }
   });
 
-  closeSettingsBtn.addEventListener('click', () => {
-    settingsPanel.classList.add('settings-hidden');
-    settingsPanel.setAttribute('aria-hidden', 'true');
-  });
-
-  // Dark mode toggle
+  // Save dark mode setting to localStorage as well
   const darkModeCheckbox = document.getElementById('toggle-darkmode');
+  if(localStorage.getItem('darkMode') === 'on') {
+    darkModeCheckbox.checked = true;
+    document.body.classList.add('dark-mode');
+  }
+
   darkModeCheckbox.addEventListener('change', () => {
     if (darkModeCheckbox.checked) {
       document.body.classList.add('dark-mode');
+      localStorage.setItem('darkMode', 'on');
     } else {
       document.body.classList.remove('dark-mode');
+      localStorage.setItem('darkMode', 'off');
     }
   });
 
-  // Ambient sound toggle (placeholder)
-  const soundCheckbox = document.getElementById('toggle-sound');
-  soundCheckbox.addEventListener('change', () => {
-    if (soundCheckbox.checked) {
-      // TODO: play ambient sound
-      console.log('Ambient sound ON');
-    } else {
-      // TODO: stop ambient sound
-      console.log('Ambient sound OFF');
-    }
-  });
-
-  // Text size selector
+  // Text size with localStorage
   const textSizeSelect = document.getElementById('text-size-select');
+  if(localStorage.getItem('textSize')) {
+    textSizeSelect.value = localStorage.getItem('textSize');
+    document.body.style.fontSize = {
+      small: '14px',
+      medium: '16px',
+      large: '18px'
+    }[textSizeSelect.value];
+  }
   textSizeSelect.addEventListener('change', () => {
     document.body.style.fontSize = {
       small: '14px',
       medium: '16px',
       large: '18px'
     }[textSizeSelect.value];
+    localStorage.setItem('textSize', textSizeSelect.value);
   });
 
-  // Font style selector
+  // Font style with localStorage
   const fontStyleSelect = document.getElementById('font-style-select');
+  if(localStorage.getItem('fontStyle')) {
+    fontStyleSelect.value = localStorage.getItem('fontStyle');
+    document.body.style.fontFamily = fontStyleSelect.value === 'unica' ? "'Unica One', cursive" : "'Spectral', serif";
+  }
   fontStyleSelect.addEventListener('change', () => {
     if (fontStyleSelect.value === 'unica') {
       document.body.style.fontFamily = "'Unica One', cursive";
     } else {
       document.body.style.fontFamily = "'Spectral', serif";
     }
+    localStorage.setItem('fontStyle', fontStyleSelect.value);
   });
 </script>
+
 
 </html>

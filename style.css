@@ -289,3 +289,44 @@ body.dark-mode {
     background: #ffa7b3;
   }
   
+
+  /* Fix footer with sticky nav */
+body {
+    padding-bottom: 3.5rem; /* space for footer */
+  }
+  
+  footer {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: rgba(15,12,41,0.9);
+    padding: 0.7rem 1rem;
+    color: #aaa;
+    font-size: 0.85rem;
+    text-align: center;
+    z-index: 9998;
+    border-top: 1px solid #ffb6b9;
+  }
+  
+  /* Glowing cursor effect */
+  body {
+    cursor: none; /* hide default cursor */
+    position: relative;
+    overflow-x: hidden;
+  }
+  
+  .cursor-glow {
+    position: fixed;
+    top: 0; left: 0;
+    width: 40px;
+    height: 40px;
+    pointer-events: none;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(255,111,141,0.7) 0%, rgba(255,111,141,0) 60%);
+    mix-blend-mode: screen;
+    transform: translate(-50%, -50%);
+    transition: background 0.3s ease;
+    z-index: 99999;
+  }
+  
